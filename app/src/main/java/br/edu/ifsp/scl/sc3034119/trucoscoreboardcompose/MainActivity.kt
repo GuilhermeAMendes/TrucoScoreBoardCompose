@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +19,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -68,18 +71,90 @@ fun TrucoScreen(modifier: Modifier = Modifier){
     var matchWinner = getMatchWinner(scoreTeamOne, scoreTeamTwo)
     var isEndGame = matchWinner != null
 
-    Text(
-        text = "Placar da Partida",
-        fontSize = 32.sp,
-        fontWeight = FontWeight.Bold,
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center
-    )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = "Placar da Partida",
+            fontSize = 32.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp),
+            textAlign = TextAlign.Center
+        )
 
-    ResetButton(
-        reset = {resetPoints()},
-        modifier = Modifier.padding(top = 16.dp)
-    )
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ){
+            ActionButtons(
+                onIncrementOne = { calculateNewScore(scoreTeamOne, 1) },
+                onIncrementThree = { calculateNewScore(scoreTeamOne, 3) },
+                isActionsEnabled = !isEndGame
+            )
+            ActionButtons(
+                onIncrementOne = { calculateNewScore(scoreTeamTwo, 1) },
+                onIncrementThree = { calculateNewScore(scoreTeamTwo, 3) },
+                isActionsEnabled = !isEndGame
+            )
+        }
+
+        ResetButton(
+            reset = {resetPoints()},
+            modifier = Modifier.padding(top = 16.dp)
+        )
+    }
+}
+
+@Composable
+fun ActionButtons(
+    onIncrementOne: () -> Unit,
+    onIncrementThree: () -> Unit,
+    isActionsEnabled: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Button(
+            onClick = onIncrementOne,
+            enabled = isActionsEnabled
+        ) {
+            Text("+1 ponto")
+        }
+
+        Button(
+            onClick = onIncrementThree,
+            enabled = isActionsEnabled
+        ) {
+            Text("+3 pontos")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ActionButtonsPreview(){
+    Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
+    ) {
+        ActionButtons(
+            onIncrementOne = {},
+            onIncrementThree = {},
+            isActionsEnabled = true
+        )
+        ActionButtons(
+            onIncrementOne = {},
+            onIncrementThree = {},
+            isActionsEnabled = false
+        )
+    }
 }
 
 @Composable
