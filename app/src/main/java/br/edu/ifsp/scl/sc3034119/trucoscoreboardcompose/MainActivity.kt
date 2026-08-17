@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -68,8 +67,8 @@ fun TrucoScreen(modifier: Modifier = Modifier){
         return minOf(currentScore + pointsToAdd, LIMIT_OF_POINTS)
     }
 
-    var matchWinner = getMatchWinner(scoreTeamOne, scoreTeamTwo)
-    var isEndGame = matchWinner != null
+    val matchWinner = getMatchWinner(scoreTeamOne, scoreTeamTwo)
+    val isEndGame = matchWinner != null
 
     Column(
         modifier = Modifier.fillMaxSize().padding(16.dp),
