@@ -61,6 +61,10 @@ fun TrucoScreen(modifier: Modifier = Modifier){
         scoreTeamTwo = 0
     }
 
+    fun calculateNewScore(currentScore: Int, pointsToAdd: Int): Int {
+        return minOf(currentScore + pointsToAdd, LIMIT_OF_POINTS)
+    }
+
     var matchWinner = getMatchWinner(scoreTeamOne, scoreTeamTwo)
     var isEndGame = matchWinner != null
 
