@@ -42,6 +42,17 @@ fun TrucoScreen(modifier: Modifier = Modifier){
     var scoreTeamTwo by remember { mutableIntStateOf(0) }
     val LIMIT_OF_POINTS: Int = 12
 
+    fun getMatchWinner(scoreOne: Int, scoreTwo: Int, limit: Int = LIMIT_OF_POINTS): String? {
+        return when {
+            scoreTeamOne >= LIMIT_OF_POINTS -> "Equipe 1°"
+            scoreTeamTwo >= LIMIT_OF_POINTS -> "Equipe 2°"
+            else -> null
+        }
+    }
+
+    var matchWinner = getMatchWinner(scoreTeamOne, scoreTeamTwo)
+    var isEndGame = matchWinner != null
+
     Text(
         text = "Placar da Partida",
         fontSize = 32.sp,
