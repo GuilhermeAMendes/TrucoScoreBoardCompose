@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -56,6 +56,11 @@ fun TrucoScreen(modifier: Modifier = Modifier){
         }
     }
 
+    fun resetPoints() {
+        scoreTeamOne = 0
+        scoreTeamTwo = 0
+    }
+
     var matchWinner = getMatchWinner(scoreTeamOne, scoreTeamTwo)
     var isEndGame = matchWinner != null
 
@@ -66,6 +71,28 @@ fun TrucoScreen(modifier: Modifier = Modifier){
         modifier = Modifier.fillMaxWidth(),
         textAlign = TextAlign.Center
     )
+
+    ResetButton(
+        reset = {resetPoints()},
+        modifier = Modifier.padding(top = 16.dp)
+    )
+}
+
+@Composable
+fun ResetButton(
+    reset: () -> Unit,
+    modifier: Modifier = Modifier
+){
+    Button(
+        onClick = reset,
+        modifier = modifier.fillMaxWidth()
+    ){Text(text = "Reiniciar")}
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ResetButtonPreview(){
+    ResetButton(reset = {})
 }
 
 @Composable
