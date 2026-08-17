@@ -10,6 +10,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +38,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TrucoScreen(modifier: Modifier = Modifier){
+    var scoreTeamOne by remember { mutableIntStateOf(0) }
+    var scoreTeamTwo by remember { mutableIntStateOf(0) }
+    val LIMIT_OF_POINTS: Int = 12
+
     Text(
         text = "Placar da Partida",
         fontSize = 32.sp,
