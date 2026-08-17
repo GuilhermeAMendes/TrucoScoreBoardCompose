@@ -36,11 +36,12 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+const val LIMIT_OF_POINTS = 12
+
 @Composable
 fun TrucoScreen(modifier: Modifier = Modifier){
     var scoreTeamOne by remember { mutableIntStateOf(0) }
     var scoreTeamTwo by remember { mutableIntStateOf(0) }
-    val LIMIT_OF_POINTS: Int = 12
 
     fun getMatchWinner(scoreOne: Int, scoreTwo: Int, limit: Int = LIMIT_OF_POINTS): String? {
         return when {
