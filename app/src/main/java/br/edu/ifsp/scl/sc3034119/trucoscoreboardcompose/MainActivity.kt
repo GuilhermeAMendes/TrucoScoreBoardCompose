@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -83,11 +84,14 @@ fun GameAlertMessage(
         else -> ""
     }
 
+    val messageColor: Color = matchWinner?.let { Color.Green } ?: Color.Red
+
     if (alertMessage.isNotEmpty()) {
         Text(
             text = alertMessage,
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
+            color = messageColor,
             textAlign = TextAlign.Center,
             modifier = modifier.fillMaxWidth()
         )
