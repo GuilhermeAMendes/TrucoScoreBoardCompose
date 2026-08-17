@@ -50,8 +50,8 @@ fun TrucoScreen(modifier: Modifier = Modifier){
 
     fun getMatchWinner(scoreOne: Int, scoreTwo: Int, limit: Int = LIMIT_OF_POINTS): String? {
         return when {
-            scoreTeamOne >= LIMIT_OF_POINTS -> "Equipe 1°"
-            scoreTeamTwo >= LIMIT_OF_POINTS -> "Equipe 2°"
+            scoreOne >= LIMIT_OF_POINTS -> "Equipe 1°"
+            scoreTwo >= LIMIT_OF_POINTS -> "Equipe 2°"
             else -> null
         }
     }
