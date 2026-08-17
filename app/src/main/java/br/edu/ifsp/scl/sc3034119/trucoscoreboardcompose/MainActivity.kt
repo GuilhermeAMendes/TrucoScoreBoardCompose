@@ -72,9 +72,7 @@ fun TrucoScreen(modifier: Modifier = Modifier){
     var isEndGame = matchWinner != null
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+        modifier = Modifier.fillMaxSize().padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -87,7 +85,7 @@ fun TrucoScreen(modifier: Modifier = Modifier){
         )
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp),
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
             ActionButtons(
@@ -103,10 +101,41 @@ fun TrucoScreen(modifier: Modifier = Modifier){
         }
 
         ResetButton(
-            reset = {resetPoints()},
+            reset = { resetPoints() },
             modifier = Modifier.padding(top = 16.dp)
         )
     }
+}
+
+@Composable
+fun TeamBox(
+    teamName: String,
+    score: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        Text(
+            text = teamName,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.SemiBold
+        )
+        Text(
+            text = score.toString(),
+            fontSize = 64.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.DarkGray
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TeamBoxPreview() {
+    TeamBox(teamName = "Equipe 1°", score = 10, modifier = Modifier.padding(16.dp))
 }
 
 @Composable
